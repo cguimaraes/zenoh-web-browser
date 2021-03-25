@@ -21,10 +21,9 @@ RUN useradd -ms /bin/bash user-docker
 USER user-docker
 WORKDIR /home/user-docker
 
-RUN mkdir /home/user-docker/app
-COPY . /home/user-docker/app/
-RUN cd /home/user-docker/app && \
+RUN git clone https://github.com/cguimaraes/zenoh-web-browser.git && \
+    cd /home/user-docker/zenoh-web-browser && \
     qmake && make
 
-CMD /home/user-docker/app/dist/zenoh-web-browser
+CMD /home/user-docker/zenoh-web-browser/dist/zenoh-web-browser
 
