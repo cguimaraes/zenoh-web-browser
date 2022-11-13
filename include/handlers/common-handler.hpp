@@ -26,6 +26,8 @@ class CommonHandler : public QWebEngineUrlSchemeHandler
 protected:
   CommonHandler(QObject *parent = 0);
   virtual void requestStarted(QWebEngineUrlRequestJob *request) = 0;
+
+public:
   void sendDataToRendering(QWebEngineUrlRequestJob *request,
                            const char* data,
                            size_t data_len);

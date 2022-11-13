@@ -22,13 +22,15 @@
 
 extern "C" {
   #define ZENOH_LINUX 1
-  #include <zenoh-pico/net/property.h>
+  #define ZENOH_C_STANDARD 99
+
+  #include <zenoh-pico.h>
 }
 
 class ZenohHandler : public CommonHandler
 {
 private:
-  zn_properties_t *config = NULL;
+  z_owned_config_t config;
 
 public:
   static const char* SCHEMA;

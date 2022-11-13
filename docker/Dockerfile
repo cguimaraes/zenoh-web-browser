@@ -12,9 +12,9 @@ RUN apt update && \
                    qml-module-qtquick-controls qml-module-qtwebengine && \
     rm -rf /var/lib/apt/lists/*
 
-RUN git clone https://github.com/eclipse-zenoh/zenoh-pico.git && \
-    cd zenoh-pico && \
-    make && make install && \
+RUN git clone https://github.com/cguimaraes/zenoh-pico.git && \
+    cd zenoh-pico && git checkout build && \
+    EXTRA_OPTIONS='-DCMAKE_C_STANDARD=99' make && make install && \
     ldconfig
 
 RUN useradd -ms /bin/bash user-docker
@@ -22,7 +22,7 @@ USER user-docker
 WORKDIR /home/user-docker
 
 RUN git clone https://github.com/cguimaraes/zenoh-web-browser.git && \
-    cd /home/user-docker/zenoh-web-browser && \
+    cd /home/user-docker/zenoh-web-browser && git checkout v0.6.0-update && \
     qmake && make
 
 CMD /home/user-docker/zenoh-web-browser/dist/zenoh-web-browser
